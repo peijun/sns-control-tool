@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect, get_object_or_404
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 from .forms import PostForm
@@ -35,3 +35,20 @@ def add_post(request):
 def view_post(request):
     posts = Post.objects.all()
     return render(request, 'snscontrol/view_post.html', {'posts': posts})
+
+@login_required
+def master_post(request):
+    posts = Post.objects.all()
+    return render(request, 'snscontrol/master_post.html', {'posts': posts})
+
+@login_required
+def approve_post(request,pk):
+    user = request.user
+    post = get_object_or_404(Post, pk=pk)
+    if user.authority <= 1:
+        if request.method == 'POST':
+            post.is_approval = True
+            post.save()
+        return redirect('master_post')
+    else:
+        return HttpResponse("Sorry, you CANT this action")

@@ -5,4 +5,4 @@ from django.contrib.auth.models import AbstractUser
 
 class CustomUser(AbstractUser):
     belongs = models.CharField(max_length=30)
-    authority = models.IntegerField(null=True)
+    authority = models.IntegerField(default=2)

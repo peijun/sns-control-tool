@@ -5,12 +5,12 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
-    <title>投稿文章一覧</title>
+    <title>投稿文章管理</title>
 </head>
 
 <body>
     <div class="container">
-    <h1>投稿文章一覧</h1>
+    <h1>投稿文章管理</h1>
 
     <p>こんにちは{{ user.username }}さん</p>
     <ul class="list-group">
@@ -52,6 +52,10 @@
                 {% endif %}
                 {% if post.is_approval == False %}
                 <p>承認：未承認</p>
+                <form action='../approve_post/{{ post.pk }}/' method="post">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-primary">承認</button>
+                </form>
                 {% endif %}
             </li>
             {% endif %}
