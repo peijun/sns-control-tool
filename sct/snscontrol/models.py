@@ -6,7 +6,7 @@ from django.utils import timezone
 
 class Post(models.Model):
     title = models.CharField(max_length=100)
-    text = models.CharField(max_length=280)
+    content = models.CharField(max_length=280)
     image1 = models.ImageField(blank=True)
     image2 = models.ImageField(blank=True)
     image3 = models.ImageField(blank=True)
