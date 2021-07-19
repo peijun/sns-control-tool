@@ -15,10 +15,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path
+from django.conf.urls.static import static
+from . import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('sc/', include('snscontrol.urls')),
     path('user/', include('django.contrib.auth.urls')),
     path('user/', include('usercontrol.urls')),
-]
+] + static(settings.IMAGE_URL, document_root=settings.IMAGE_ROOT)
