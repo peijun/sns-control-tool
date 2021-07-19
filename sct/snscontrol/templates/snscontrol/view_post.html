@@ -9,7 +9,7 @@
 </head>
 
 <body>
-    <h1>ホーム画面</h1>
+    <h1>投稿文章一覧</h1>
 
     <p>こんにちは{{ user.username }}さん</p>
     <ul class="list-group">
@@ -45,6 +45,12 @@
                 <div class ="image4">
                     <img src="{{ post.image4.url }}" style="width:300px;height:auto">
                 </div>
+                {% endif %}
+                {% if post.is_approval == True %}
+                <p>承認：承認済み</p>
+                {% endif %}
+                {% if post.is_approval == False %}
+                <p>承認：未承認</p>
                 {% endif %}
             </li>
             {% endif %}

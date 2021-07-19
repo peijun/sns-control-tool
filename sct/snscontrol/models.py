@@ -12,6 +12,7 @@ class Post(models.Model):
     image3 = models.ImageField(upload_to='images',blank=True,null=True)
     image4 = models.ImageField(upload_to='images',blank=True,null=True)
     is_public = models.BooleanField(default=False)
+    is_approval = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
