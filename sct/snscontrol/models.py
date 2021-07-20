@@ -1,5 +1,8 @@
 from django.db import models
+from django.db.models.deletion import SET_NULL
 from django.db.models.fields import CharField
+from django.db.models.fields.related import ForeignKey
+from django.contrib.auth import get_user_model
 from django.utils import timezone
 
 # Create your models here.
@@ -12,7 +15,12 @@ class Post(models.Model):
     image3 = models.ImageField(upload_to='images',blank=True,null=True)
     image4 = models.ImageField(upload_to='images',blank=True,null=True)
     is_public = models.BooleanField(default=False)
+    is_publish_twitter = models.BooleanField(default=False)
+    is_publish_instagram = models.BooleanField(default=False)
+    is_publish_facebook = models.BooleanField(default=False)
+    is_publish_line = models.BooleanField(default=False)
     is_approval = models.BooleanField(default=False)
+    approver = ForeignKey(get_user_model(),null=True,on_delete=models.SET_NULL)
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:

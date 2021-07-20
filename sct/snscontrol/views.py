@@ -48,6 +48,7 @@ def approve_post(request,pk):
     if user.authority <= 1:
         if request.method == 'POST':
             post.is_approval = True
+            post.approver = user
             post.save()
         return redirect('master_post')
     else:

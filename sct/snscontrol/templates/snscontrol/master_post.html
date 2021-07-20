@@ -49,6 +49,7 @@
                 {% endif %}
                 {% if post.is_approval == True %}
                 <p>承認：承認済み</p>
+                <p>承認者：{{ post.approver }}</p>
                 {% endif %}
                 {% if post.is_approval == False %}
                 <p>承認：未承認</p>
