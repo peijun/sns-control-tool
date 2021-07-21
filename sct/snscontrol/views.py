@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 from .forms import PostForm
 from .models import Post
+from .twitter import TwitterUtil, TwitterUpload
 
 # Create your views here.
 
@@ -53,3 +54,58 @@ def approve_post(request,pk):
         return redirect('master_post')
     else:
         return HttpResponse("Sorry, you CANT this action")
+
+@login_required
+def publish_twitter(request,pk):
+    post = get_object_or_404(Post,pk=pk)
+    
+    if post.is_publish_twitter == True:
+        return HttpResponse("This post was published")
+    else:
+        #try:
+            if request.method == 'POST':
+                t = TwitterUtil()
+                t_up = TwitterUpload()
+
+                if post.image1:
+                    with open(post.image1.path, "rb") as imagefile:
+                        imagedata1 = imagefile.read()
+                    id_img1 = t_up.upload_media(imagedata1)
+                    
+                    if post.image2:
+                        with open(post.image2.path, "rb") as imagefile:
+                            imagedata2 = imagefile.read()
+                        id_img2 = t_up.upload_media(imagedata2)
+
+                        if post.image3:
+                            with open(post.image3.path, "rb") as imagefile:
+                                imagedata3 = imagefile.read()
+                            id_img3 = t_up.upload_media(imagedata3)
+
+                            if post.image4:
+                                with open(post.image4.path, "rb") as imagefile:
+                                    imagedata4 = imagefile.read()
+                                id_img4 = t_up.upload_media(imagedata4)
+
+                                t.post_with_media(text=post.content,media_ids=",".join([id_img1, id_img2, id_img3, id_img4]))
+                            else:
+                                t.post_with_media(text=post.content,media_ids=",".join([id_img1, id_img2, id_img3]))
+                        else:
+                            t.post_with_media(text=post.content,media_ids=",".join([id_img1, id_img2]))
+                    else:
+                        t.post_with_media(text=post.content,media_ids=",".join([id_img1]))
+                else:
+                    t.post(text=post.content)
+
+                post.is_publish_twitter = True
+                post.is_public = True
+                post.save()
+
+                return redirect('finish_post')
+        #except:
+            #return HttpResponse("Sorry, something went wrong")
+
+@login_required
+def finish_post(request):
+    return render(request,'snscontrol/complete.html')
+        
