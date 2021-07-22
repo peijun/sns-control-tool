@@ -13,6 +13,7 @@
     <h1>投稿文章一覧</h1>
 
     <p>こんにちは{{ user.username }}さん</p>
+    <p>新規追加は<a href="../add_post">こちら</a></p>
     <ul class="list-group">
         <h2>未投稿</h2>
         {% for post in posts %}
@@ -49,6 +50,12 @@
                 {% endif %}
                 {% if post.is_approval == True %}
                 <p>承認：承認済み</p>
+                    {% if post.is_publish_twitter == False %}
+                    <form action='../publish_twitter/{{ post.pk }}/' method="post">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-primary">投稿</button>
+                    </form>
+                    {% endif %}
                 {% endif %}
                 {% if post.is_approval == False %}
                 <p>承認：未承認</p>
