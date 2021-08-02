@@ -11,11 +11,22 @@
 
     <p>こんにちは{{ user.username }}さん</p>
 
+    <h2>フォーム情報</h2>
+    <p>文字数：<span id="inputCounter">0</span>文字</p>
+    <h2>フォーム</h2>
+
     <form method="POST" class="post-form" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form.as_p }}
         <button type="submit" class="save btn btn-default">Save</button>
     </form>
+    <script>
+        var input = document.getElementById("id_content");
+        var span = document.getElementById("inputCounter");
+        input.addEventListener("keyup", function() {
+            span.textContent = input.value.length;
+        });
+    </script>
 </body>
 
 </html>
