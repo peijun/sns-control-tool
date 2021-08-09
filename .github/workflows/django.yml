@@ -27,5 +27,7 @@ jobs:
         pip install -r requirements.txt
     - name: Run Tests
       run: |
+        touch .env
+        echo "SECRET_KEY=${{  secret.SECRET_KEY  }}" >> .env
         cd sct
         python manage.py test
