@@ -4,6 +4,8 @@ from django.contrib.auth.decorators import login_required
 from .forms import PostForm
 from .models import Post
 from .twitter import TwitterUtil, TwitterUpload
+from django.utils import timezone
+
 
 # Create your views here.
 
@@ -99,6 +101,7 @@ def publish_twitter(request,pk):
 
                 post.is_publish_twitter = True
                 post.is_public = True
+                post.public_time = timezone.now()
                 post.save()
 
                 return redirect('finish_post')

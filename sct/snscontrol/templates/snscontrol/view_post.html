@@ -99,6 +99,12 @@
                     <img src="{{ post.image4.url }}" style="width:300px;height:auto">
                 </div>
                 {% endif %}
+                {% if post.is_publish_twitter == True %}
+                <p>Twitterに投稿済み</p>
+                {% endif %}
+                {% if post.public_time %}
+                <p>{{ post.public_time }}</p>
+                {% endif %}
             </li>
             {% endif %}
         {% endfor %}

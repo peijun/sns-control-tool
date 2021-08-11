@@ -107,6 +107,9 @@
                 {% if post.is_publish_twitter == True %}
                 <p>Twitterに投稿済み</p>
                 {% endif %}
+                {% if post.public_time %}
+                <p>{{ post.public_time }}</p>
+                {% endif %}
                 {% if post.is_publish_twitter == False %}
                 <form action='../publish_twitter/{{ post.pk }}/' method="post">
                     {% csrf_token %}
