@@ -15,6 +15,7 @@ class Post(models.Model):
     image3 = models.ImageField(upload_to='images',blank=True,null=True)
     image4 = models.ImageField(upload_to='images',blank=True,null=True)
     is_public = models.BooleanField(default=False)
+    public_time = models.DateTimeField(blank=True,null=True)
     is_publish_twitter = models.BooleanField(default=False)
     is_publish_instagram = models.BooleanField(default=False)
     is_publish_facebook = models.BooleanField(default=False)
