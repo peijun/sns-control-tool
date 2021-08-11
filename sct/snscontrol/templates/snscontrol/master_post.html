@@ -65,6 +65,10 @@
                     <button type="submit" class="btn btn-primary">承認</button>
                 </form>
                 {% endif %}
+                <form action='../delete_post/{{ post.pk }}/' method="post">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-danger">削除</button>
+                </form>
             </li>
             {% endif %}
         {% endfor %}

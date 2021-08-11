@@ -58,6 +58,17 @@ def approve_post(request,pk):
         return HttpResponse("Sorry, you CANT this action")
 
 @login_required
+def delete_post(request,pk):
+    user = request.user
+    post = get_object_or_404(Post, pk=pk)
+    if user.authority <= 1:
+        if request.method == 'POST':
+            post.delete()
+        return redirect('master_post')
+    else:
+        return HttpResponse("Sorry, you CANT this action")
+
+@login_required
 def publish_twitter(request,pk):
     post = get_object_or_404(Post,pk=pk)
     

@@ -57,6 +57,10 @@
                     </form>
                     {% endif %}
                 {% endif %}
+                <form action='../delete_post/{{ post.pk }}/' method="post">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-danger">削除</button>
+                </form>
                 {% if post.is_approval == False %}
                 <p>承認：未承認</p>
                 {% endif %}

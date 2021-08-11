@@ -10,5 +10,6 @@ urlpatterns = [
     path('master_post/', views.master_post, name="master_post"),
     path('approve_post/<int:pk>/', views.approve_post, name="approve_post"),
     path('publish_twitter/<int:pk>/', views.publish_twitter, name="publish_twitter"),
+    path('delete_post/<int:pk>/', views.delete_post, name="delete_post"),
     path('complete/', views.finish_post, name='finish_post'),
 ]
