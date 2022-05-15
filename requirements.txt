@@ -1,4 +1,4 @@
 Django==3.2.13
-Pillow==8.3.2
+Pillow==9.0.1
 twitter==1.19.3
 python-dotenv==0.18.0
